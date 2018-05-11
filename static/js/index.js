@@ -107,6 +107,8 @@ function init(sample){
             'white']},
             labels: ['8-9', '7-8', '6-7', '5-6','4-5', '3-4', '2-3', '1-2','0-1'," "],
             hoverinfo:'label',
+            height:520,
+            width:520,
             hole:.5,
             type:'pie',
             showlegend:false
