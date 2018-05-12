@@ -3,7 +3,7 @@ import sqlalchemy
 from sqlalchemy import create_engine,inspect,desc
 from sqlalchemy.ext.automap import automap_base
 Base = automap_base()
-engine = create_engine('sqlite:///dataSets/belly_button_biodiversity.sqlite')
+engine = create_engine('sqlite:///DataSets/belly_button_biodiversity.sqlite')
 Base.prepare(engine, reflect = True)
 from sqlalchemy.orm import Session
 session = Session(engine)
