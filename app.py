@@ -33,7 +33,9 @@ def otu():
     return jsonify(otu_description)
 @app.route("/otu/<otu_id>")
 def otuSample(otu_id):
+    # dictList = {}
     results = session.query(Otu.lowest_taxonomic_unit_found).filter(Otu.otu_id==otu_id).all()
+    
     return jsonify(results)
 @app.route("/metadata/<sample>")
 def metaSample(sample):

@@ -33,46 +33,55 @@ function init(sample){
         var labels = response[0]["otu_ids"].slice(0,10);
         console.log(values)
     
-        var $hoverText = []
+       d3.json("/otu", function(error, otuResponse){
+           if (error) throw error;
+           var pieText = [];
+           for(i = 0, ii = labels.length;i<ii;i++){
+               pieText.push(otuResponse[labels[i]])
+           };
+        //    console.log(pieText)
+           var bubbleText = [];
+           var whole_id = response[0]["otu_ids"];
+           for(j=0,jj=whole_id.length;j<jj;j++){
+               if(error) throw error;
+               bubbleText.push(otuResponse[whole_id[j]])
+           }
+       
         
-        for(var i = 0, ii=labels.length;i<ii;i++){
-            var query_url = `/otu/${labels[i]}`
-            d3.json(query_url,function(error,otuResponse){
-                if(error) throw error;
-                $hoverText.push(otuResponse[0])
-            })
-        }
-        console.log($hoverText)
-        
-        var data1 = [{
-            "values":values,
-            "labels":labels,
-            "type":"pie",
-            "text":$hoverText
-        }]
-
-        Plotly.newPlot("pie",data1)
-        var data2 = [{
-            "x":response[0]["otu_ids"],
-            "y":response[0]["sample_values"],
-            "mode":"markers",
-            "type":"scatter",
-            "marker":{
-                "size":response[0]["sample_values"],
-                "color":response[0]["otu_ids"]
-            },
-            "text":$hoverText,
-            // "hoverinfo": {bordercolor: 'black'}
-        }];
-        var layout = {
-            xaxis:{
-                title:"OTU ID"
-            },
-            yaxis:{
-                title:"Sample Values"
+            var data1 = [{
+                "values":values,
+                "labels":labels,
+                "type":"pie",
+                "hovertext":pieText,
+                "marker":{colors: ["#4b8272", "#91ba8d", "#82ada0", "#67937a", "#f9f6bb", "#d5edb8", "#eae693", "#ffe8a5", "#ffd6a4", "#ffd4c4"]},
+            }]
+            var layout1 = {
+                "title":`<b>Top 10 ${sample} OTU ID and description</b>`
             }
-        }
-        Plotly.newPlot("bubble_chart",data2,layout)  
+
+            Plotly.newPlot("pie",data1,layout1)
+            var data2 = [{
+                "x":response[0]["otu_ids"],
+                "y":response[0]["sample_values"],
+                "mode":"markers",
+                "type":"scatter",
+                "marker":{
+                    "size":response[0]["sample_values"],
+                    "color":response[0]["otu_ids"]
+                },
+                "text":bubbleText,
+                // "hoverinfo": {bordercolor: 'black'}
+            }];
+            var layout = {
+                xaxis:{
+                    title:"OTU ID"
+                },
+                yaxis:{
+                    title:"Sample Values"
+                }
+            }
+            Plotly.newPlot("bubble_chart",data2,layout)  
+        })
     })
     freq_url = `/wfreq/${sample}`
     d3.json(freq_url,function(error,freqResponse){
