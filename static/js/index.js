@@ -61,8 +61,8 @@ function init(sample){
                 "size":response[0]["sample_values"],
                 "color":response[0]["otu_ids"]
             },
-            "hovertext":$hoverText,
-            "hoverinfo": {bordercolor: 'black'}
+            "text":$hoverText,
+            // "hoverinfo": {bordercolor: 'black'}
         }];
         var layout = {
             xaxis:{
@@ -93,8 +93,6 @@ function init(sample){
             x: [0], y:[0],
             marker: {size: 15, color:'850000'},
             showlegend: false,
-            // name: 'Number of Washes',
-            // text: level,
             hoverinfo: 'name'},
             {values: [50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50],
             rotation: 90,
