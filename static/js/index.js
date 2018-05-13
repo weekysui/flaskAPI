@@ -56,7 +56,7 @@ function init(sample){
                 "marker":{colors: ["#4b8272", "#91ba8d", "#82ada0", "#67937a", "#f9f6bb", "#d5edb8", "#eae693", "#ffe8a5", "#ffd6a4", "#ffd4c4"]},
             }]
             var layout1 = {
-                "title":`<b>Top 10 ${sample} OTU ID and description</b>`
+                "title":`<b>Top 10 ${sample}<br>OTU ID and Descriptions</b>`
             }
 
             Plotly.newPlot("pie",data1,layout1)
